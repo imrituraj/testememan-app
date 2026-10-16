@@ -8,13 +8,16 @@ const https = require('https');
 const http = require('http');
 const { URL } = require('url');
 
-const DEFAULT_PROD_URL = 'https://api.test.helpmeman.com';
-const DEFAULT_DEV_URL = 'http://localhost:8787';
+// Production backend (Cloudflare Worker) or local dev server
+const DEFAULT_PROD_URL = 'https://testmeman-api.ritur-dev.workers.dev';
+const DEFAULT_DEV_URL = process.env.TESTMEMAN_DEV_LOCAL === 'true' ? 'http://localhost:8787' : 'https://testmeman-api.ritur-dev.workers.dev';
 
 class AssessmentService {
   constructor(options = {}) {
     this.env = process.env.TESTMEMAN_ENV || (process.env.NODE_ENV === 'production' ? 'production' : 'development');
-    this.baseUrl = process.env.TESTMEMAN_API_URL || (this.env === 'production' ? DEFAULT_PROD_URL : DEFAULT_DEV_URL);
+    const rawUrl = process.env.TESTMEMAN_API_URL;
+    const safeEnvUrl = rawUrl && !/helpmeman\.com/i.test(rawUrl) ? rawUrl : null;
+    this.baseUrl = safeEnvUrl || (this.env === 'production' ? DEFAULT_PROD_URL : DEFAULT_DEV_URL);
     this.forceMock = process.env.MOCK_MODE === 'true' || options.forceMock === true;
     this.timeoutMs = options.timeoutMs || 8000;
   }

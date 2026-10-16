@@ -188,42 +188,23 @@ body {
 .brand-badge {
   display: flex;
   align-items: center;
-  gap: 10px;
+  gap: 8px;
   -webkit-app-region: no-drag;
 }
 
-.brand-logo-frame {
-  width: 30px;
-  height: 30px;
-  border-radius: 8px;
-  background: linear-gradient(135deg, rgba(245, 197, 24, 0.22), rgba(245, 197, 24, 0.06));
-  border: 1px solid rgba(245, 197, 24, 0.35);
-  box-shadow: 0 0 14px rgba(245, 197, 24, 0.18);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-shrink: 0;
-}
-
 .brand-logo-img {
-  width: 18px;
-  height: 18px;
+  height: 30px;
+  width: auto;
   object-fit: contain;
-  display: block;
+  flex-shrink: 0;
+  filter: drop-shadow(0 2px 8px rgba(0, 0, 0, 0.4));
 }
 
-.brand-title {
-  font-size: 16px;
-  font-weight: 700;
-  letter-spacing: -0.02em;
-  color: #ffffff;
-  display: flex;
-  align-items: center;
-  user-select: none;
-}
-
-.brand-title span {
-  color: var(--tm-brand, #f5c518);
+.brand-wordmark-img {
+  height: 18px;
+  width: auto;
+  object-fit: contain;
+  flex-shrink: 0;
 }
 
 .brand-product-pill {
@@ -231,12 +212,12 @@ body {
   font-weight: 600;
   letter-spacing: 0.04em;
   text-transform: uppercase;
-  color: #10b981;
-  background: rgba(16, 185, 129, 0.1);
-  border: 1px solid rgba(16, 185, 129, 0.25);
+  color: var(--tm-brand, #f5c518);
+  background: rgba(245, 197, 24, 0.1);
+  border: 1px solid rgba(245, 197, 24, 0.28);
   padding: 3px 8px;
   border-radius: 6px;
-  margin-left: 2px;
+  margin-left: 4px;
   line-height: 1;
 }
 
@@ -371,40 +352,18 @@ body {
 
 .auth-brand-lockup {
   display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 12px;
-  margin-bottom: 22px;
-}
-
-.auth-logo-frame {
-  width: 64px;
-  height: 64px;
-  border-radius: 18px;
-  background: linear-gradient(135deg, rgba(245, 197, 24, 0.25), rgba(245, 197, 24, 0.06));
-  border: 1px solid rgba(245, 197, 24, 0.38);
-  box-shadow: 0 0 28px rgba(245, 197, 24, 0.22);
-  display: flex;
   align-items: center;
   justify-content: center;
+  margin-bottom: 24px;
 }
 
-.auth-logo-img {
-  width: 40px;
-  height: 40px;
+.auth-brand-logo {
+  width: 165px;
+  height: auto;
+  max-width: 100%;
   object-fit: contain;
+  filter: drop-shadow(0 6px 20px rgba(0, 0, 0, 0.45));
   display: block;
-}
-
-.auth-brand-title {
-  font-size: 24px;
-  font-weight: 800;
-  letter-spacing: -0.03em;
-  color: #ffffff;
-}
-
-.auth-brand-title span {
-  color: var(--tm-brand, #f5c518);
 }
 
 .auth-subtitle {
@@ -882,35 +841,19 @@ body {
   flex-shrink: 0;
 }
 
-.exam-logo-frame {
-  width: 26px;
+.exam-brand-mascot {
   height: 26px;
-  border-radius: 7px;
-  background: linear-gradient(135deg, rgba(245, 197, 24, 0.2), rgba(245, 197, 24, 0.05));
-  border: 1px solid rgba(245, 197, 24, 0.32);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-shrink: 0;
-}
-
-.exam-logo-img {
-  width: 16px;
-  height: 16px;
+  width: auto;
   object-fit: contain;
-  display: block;
+  flex-shrink: 0;
+  filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.45));
 }
 
-.exam-brand-title {
-  font-size: 14px;
-  font-weight: 700;
-  letter-spacing: -0.02em;
-  color: #ffffff;
-  user-select: none;
-}
-
-.exam-brand-title span {
-  color: var(--tm-brand, #f5c518);
+.exam-brand-wordmark {
+  height: 16px;
+  width: auto;
+  object-fit: contain;
+  flex-shrink: 0;
 }
 
 .exam-brand-divider {

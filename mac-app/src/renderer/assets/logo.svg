@@ -1,0 +1,13 @@
+<svg viewBox="0 0 1000 1000" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <!-- Left Pillar -->
+  <polygon points="210,230 345,310 345,765 210,685" fill="currentColor" />
+  
+  <!-- Right Pillar -->
+  <polygon points="790,230 655,310 655,765 790,685" fill="currentColor" />
+  
+  <!-- Central Chevron -->
+  <polygon points="370,330 500,412 630,330 630,446 500,528 370,446" fill="currentColor" />
+  
+  <!-- Central Diamond -->
+  <polygon points="500,544 565,609 500,674 435,609" fill="currentColor" />
+</svg>

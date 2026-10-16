@@ -1,0 +1,61 @@
+{
+  "name": "testmeman-mac-app",
+  "version": "1.0.0",
+  "description": "TestMeMan Secure Assessment Lockdown Client for macOS (OA Proctor & Safe Exam Browser)",
+  "main": "src/main/main.js",
+  "author": "TestMeMan Technologies",
+  "license": "UNLICENSED",
+  "private": true,
+  "scripts": {
+    "start": "electron .",
+    "dev": "electron . --dev",
+    "test": "node --test test/**/*.test.js",
+    "pack": "electron-builder --dir",
+    "build:mac": "electron-builder --mac",
+    "build:mac:dmg": "electron-builder --mac dmg",
+    "build:mac:zip": "electron-builder --mac zip"
+  },
+  "build": {
+    "appId": "com.testmeman.lockdown.mac",
+    "productName": "TestMeMan Secure Assessment",
+    "copyright": "Copyright © 2026 TestMeMan",
+    "directories": {
+      "output": "dist"
+    },
+    "mac": {
+      "category": "public.app-category.education",
+      "target": [
+        "dir",
+        "dmg",
+        "zip"
+      ],
+      "icon": "src/renderer/assets/icon.png",
+      "hardenedRuntime": false,
+      "gatekeeperAssess": false,
+      "darkModeSupport": true
+    },
+    "dmg": {
+      "contents": [
+        {
+          "x": 130,
+          "y": 220
+        },
+        {
+          "x": 410,
+          "y": 220,
+          "type": "link",
+          "path": "/Applications"
+        }
+      ]
+    },
+    "files": [
+      "src/**/*",
+      "package.json"
+    ]
+  },
+  "dependencies": {},
+  "devDependencies": {
+    "electron": "^34.3.0",
+    "electron-builder": "^25.1.8"
+  }
+}

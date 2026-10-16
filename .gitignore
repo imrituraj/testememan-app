@@ -1,0 +1,24 @@
+# Dependencies
+node_modules/
+*/node_modules/
+
+# Production build outputs
+dist/
+*/dist/
+out/
+*/out/
+
+# OS files
+.DS_Store
+*/.DS_Store
+Thumbs.db
+
+# Logs & test runs
+*.log
+integrity-logs/
+*/integrity-logs/
+
+# Environment files
+.env
+.env.local
+.env.*.local

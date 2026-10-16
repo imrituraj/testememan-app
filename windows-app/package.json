@@ -1,0 +1,49 @@
+{
+  "name": "testmeman-windows-app",
+  "version": "1.0.0",
+  "description": "TestMeMan Secure Online Assessment Lockdown Client for Windows (OA Proctor & Safe Exam Browser)",
+  "main": "src/main/main.js",
+  "author": "TestMeMan Technologies",
+  "license": "UNLICENSED",
+  "private": true,
+  "scripts": {
+    "start": "electron .",
+    "dev": "electron . --dev",
+    "test": "node --test test/**/*.test.js",
+    "test:mac": "cross-env TMM_MOCK_WIN=true electron .",
+    "pack": "electron-builder --dir",
+    "build:win": "electron-builder --win",
+    "build:win:portable": "electron-builder --win portable"
+  },
+  "build": {
+    "appId": "com.testmeman.lockdown",
+    "productName": "TestMeMan Secure Assessment",
+    "copyright": "Copyright © 2026 TestMeMan",
+    "directories": {
+      "output": "dist"
+    },
+    "win": {
+      "target": [
+        "nsis",
+        "portable"
+      ],
+      "icon": "src/renderer/assets/icon.png",
+      "requestedExecutionLevel": "requireAdministrator"
+    },
+    "nsis": {
+      "oneClick": false,
+      "allowToChangeInstallationDirectory": true,
+      "createDesktopShortcut": true,
+      "createStartMenuShortcut": true
+    },
+    "files": [
+      "src/**/*",
+      "package.json"
+    ]
+  },
+  "dependencies": {},
+  "devDependencies": {
+    "electron": "^34.3.0",
+    "electron-builder": "^25.1.8"
+  }
+}

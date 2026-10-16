@@ -1,0 +1,523 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>TestMeMan Secure Assessment</title>
+  <link rel="stylesheet" href="styles/app.css">
+</head>
+<body>
+
+  <!-- Desktop App Header Bar -->
+  <header class="app-header">
+    <div class="brand-badge">
+      <img src="assets/brand/mascot.webp" alt="TestMeMan Mascot" class="brand-logo-img">
+      <img src="assets/brand/wordmark-white.webp" alt="TestMeMan" class="brand-wordmark-img">
+      <span class="brand-product-pill">Secure Client</span>
+    </div>
+
+    <div class="header-meta">
+      <div id="envModeBadge" class="badge-pill">
+        <span class="status-dot dot-green animate-beacon"></span>
+        <span id="envModeText">Verified Assessment</span>
+      </div>
+      <div id="headerSyncPill" class="badge-pill" style="display: none;">
+        <span class="status-dot dot-green"></span>
+        <span id="syncText">Connected</span>
+      </div>
+      <button id="btnQuitHeader" class="btn-ghost-sm">Exit App</button>
+    </div>
+  </header>
+
+  <!-- Viewport for Assessment Flow -->
+  <main class="app-viewport">
+
+    <!-- =========================================================
+         SCREEN 1: AUTHENTICATION & ACCESS CODE
+         ========================================================= -->
+    <section id="screenEntry" class="screen-view active">
+      <div class="auth-stage">
+        <div class="auth-card hacker-glass hacker-specular">
+          <div class="auth-header">
+            <div class="auth-brand-lockup">
+              <img src="assets/brand/logo-full-white.webp" alt="TestMeMan" class="auth-brand-logo" onerror="this.src='assets/brand/mascot.webp'">
+            </div>
+            <div class="auth-subtitle">Online Assessment Portal</div>
+            <h1 class="auth-title">Candidate Authentication</h1>
+            <p class="auth-desc">Enter your assessment passcode and verification credentials to proceed.</p>
+          </div>
+
+          <!-- Passcode Input -->
+          <div class="form-group">
+            <label class="form-label" for="codeInput">Assessment Access Code</label>
+            <div class="input-container">
+              <span class="input-icon">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect><path d="M7 11V7a5 5 0 0 1 10 0v4"></path></svg>
+              </span>
+              <input 
+                id="codeInput" 
+                class="text-input code-style" 
+                type="text" 
+                placeholder="E.G. TCS-NQT-2026" 
+                autocomplete="off" 
+                spellcheck="false"
+                value="TCS-NQT-2026"
+              >
+            </div>
+          </div>
+
+          <!-- Candidate Details -->
+          <div class="grid-2">
+            <div class="form-group">
+              <label class="form-label" for="candidateNameInput">Candidate Full Name</label>
+              <div class="input-container">
+                <span class="input-icon">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg>
+                </span>
+                <input id="candidateNameInput" class="text-input" type="text" placeholder="Full Name" value="Rahul Sharma">
+              </div>
+            </div>
+            <div class="form-group">
+              <label class="form-label" for="candidateIdInput">Roll / Candidate ID</label>
+              <div class="input-container">
+                <span class="input-icon">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><rect x="3" y="4" width="18" height="16" rx="2"></rect><line x1="7" y1="8" x2="17" y2="8"></line><line x1="7" y1="12" x2="13" y2="12"></line></svg>
+                </span>
+                <input id="candidateIdInput" class="text-input" type="text" placeholder="Roll Number" value="22CS089">
+              </div>
+            </div>
+          </div>
+
+          <!-- Notification / Error Box -->
+          <div id="authNoticeBanner" style="display: none; padding: 12px 16px; border-radius: 10px; font-size: 12.5px; margin-bottom: 18px;"></div>
+
+          <!-- Action Button -->
+          <button id="btnVerifyCode" class="btn-primary">
+            <span>Verify & Continue</span>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+          </button>
+
+          <div class="auth-footer-help">
+            <span>Corporate & Campus Proctored Terminal</span>
+            <button id="btnQuickDemoFill" class="demo-code-toggle" type="button">Fill Sample Code</button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- =========================================================
+         SCREEN 2: PRE-FLIGHT COMPLIANCE CHECKLIST
+         ========================================================= -->
+    <section id="screenPreflight" class="screen-view">
+      <div class="stage-container">
+        <div class="stage-header">
+          <div class="auth-subtitle">Pre-Assessment Audit</div>
+          <h1 class="stage-title">System Readiness Verification</h1>
+          <p class="stage-desc">Verifying your workstation compliance before entering the secure locked environment.</p>
+        </div>
+
+        <div class="audit-table hacker-glass hacker-specular">
+          <!-- OS Row -->
+          <div class="audit-row">
+            <div class="audit-row-left">
+              <div class="audit-icon-frame">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><rect x="4" y="4" width="16" height="16" rx="2"></rect><line x1="9" y1="9" x2="15" y2="15"></line><line x1="15" y1="9" x2="9" y2="15"></line></svg>
+              </div>
+              <div class="audit-meta">
+                <h4>Operating System</h4>
+                <p id="chkOsText">Verifying macOS environment compatibility...</p>
+              </div>
+            </div>
+            <span id="badgeOsStatus" class="audit-status-tag warning">Checking</span>
+          </div>
+
+          <!-- Display Row -->
+          <div class="audit-row">
+            <div class="audit-row-left">
+              <div class="audit-icon-frame">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><rect x="2" y="3" width="20" height="14" rx="2" ry="2"></rect><line x1="8" y1="21" x2="16" y2="21"></line><line x1="12" y1="17" x2="12" y2="21"></line></svg>
+              </div>
+              <div class="audit-meta">
+                <h4>Display Configuration</h4>
+                <p id="chkDisplayText">Auditing single-monitor integrity and screen sharing...</p>
+              </div>
+            </div>
+            <span id="badgeDisplayStatus" class="audit-status-tag warning">Checking</span>
+          </div>
+
+          <!-- Process Compliance Row -->
+          <div class="audit-row">
+            <div class="audit-row-left">
+              <div class="audit-icon-frame">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect><path d="M7 11V7a5 5 0 0 1 10 0v4"></path></svg>
+              </div>
+              <div class="audit-meta">
+                <h4>Process Compliance</h4>
+                <p id="chkAppText">Auditing unauthorized background applications...</p>
+              </div>
+            </div>
+            <div style="display: flex; align-items: center; gap: 8px;">
+              <button id="btnAttemptCloseApps" class="btn-ghost-sm" style="display: none;">Close Active Apps</button>
+              <span id="badgeAppStatus" class="audit-status-tag warning">Checking</span>
+            </div>
+          </div>
+
+          <!-- Camera & Media Row -->
+          <div class="audit-row">
+            <div class="audit-row-left">
+              <div class="audit-icon-frame">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"></path><circle cx="12" cy="13" r="4"></circle></svg>
+              </div>
+              <div class="audit-meta">
+                <h4>Camera & Audio Feed</h4>
+                <p id="chkMediaText">Validating FaceTime HD camera and microphone access...</p>
+              </div>
+            </div>
+            <span id="badgeMediaStatus" class="audit-status-tag warning">Checking</span>
+          </div>
+
+          <!-- Network Row -->
+          <div class="audit-row">
+            <div class="audit-row-left">
+              <div class="audit-icon-frame">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M5 12.55a11 11 0 0 1 14.08 0"></path><path d="M1.42 9a16 16 0 0 1 21.16 0"></path><path d="M8.53 16.11a6 6 0 0 1 6.95 0"></path><line x1="12" y1="20" x2="12.01" y2="20"></line></svg>
+              </div>
+              <div class="audit-meta">
+                <h4>Server Connectivity</h4>
+                <p id="chkNetworkText">Measuring latency and clock synchronization...</p>
+              </div>
+            </div>
+            <span id="badgeNetworkStatus" class="audit-status-tag warning">Checking</span>
+          </div>
+        </div>
+
+        <div class="stage-actions">
+          <button id="btnPreflightBack" class="btn-secondary">Back</button>
+          <button id="btnPreflightRescan" class="btn-secondary">Re-run Audit</button>
+          <button id="btnPreflightProceed" class="btn-primary" style="flex: 1; margin: 0;">
+            <span>Proceed to Instructions</span>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+          </button>
+        </div>
+      </div>
+    </section>
+
+    <!-- =========================================================
+         SCREEN 3: EXAM INSTRUCTIONS & START CONFIRMATION
+         ========================================================= -->
+    <section id="screenInstructions" class="screen-view">
+      <div class="stage-container">
+        <div class="stage-header">
+          <div class="auth-subtitle">Assessment Configuration</div>
+          <h1 class="stage-title" id="instExamTitle">TCS NQT 2026</h1>
+          <p class="stage-desc" id="instCandidateLabel">Candidate: Rahul Sharma (22CS089)</p>
+        </div>
+
+        <div class="meta-summary-grid">
+          <div class="summary-pill-card hacker-glass hacker-specular">
+            <div class="summary-pill-label">Total Duration</div>
+            <div id="instDuration" class="summary-pill-value">45 Mins</div>
+          </div>
+          <div class="summary-pill-card hacker-glass hacker-specular">
+            <div class="summary-pill-label">Sections</div>
+            <div id="instSectionsCount" class="summary-pill-value">3 Sections</div>
+          </div>
+          <div class="summary-pill-card hacker-glass hacker-specular">
+            <div class="summary-pill-label">Questions</div>
+            <div id="instQuestionsCount" class="summary-pill-value">7 Items</div>
+          </div>
+          <div class="summary-pill-card hacker-glass hacker-specular">
+            <div class="summary-pill-label">Marking Scheme</div>
+            <div class="summary-pill-value" style="color: var(--emerald);">+2 / -0.25</div>
+          </div>
+        </div>
+
+        <div class="rules-panel hacker-glass hacker-specular">
+          <h3>Assessment Guidelines & Code of Conduct</h3>
+          <ul class="clean-rules-list">
+            <li>
+              <span class="rule-number">1</span>
+              <span>The window will engage locked fullscreen upon starting. Window focus and blur events are continuously recorded.</span>
+            </li>
+            <li>
+              <span class="rule-number">2</span>
+              <span>Navigating away or pressing OS task-switching shortcuts logs an integrity event against your attempt receipt.</span>
+            </li>
+            <li>
+              <span class="rule-number">3</span>
+              <span>You may mark questions for review and navigate freely between available sections.</span>
+            </li>
+            <li>
+              <span class="rule-number">4</span>
+              <span>Answers are automatically persisted locally and synchronized with the cloud assessment server.</span>
+            </li>
+            <li>
+              <span class="rule-number">5</span>
+              <span>Upon timer expiry, the test will automatically compile and submit your current responses.</span>
+            </li>
+          </ul>
+        </div>
+
+        <div class="declaration-bar hacker-glass">
+          <input type="checkbox" id="chkDeclaration">
+          <label for="chkDeclaration">
+            I confirm that I have read and agree to comply with the proctored assessment guidelines.
+          </label>
+        </div>
+
+        <div class="stage-actions">
+          <button id="btnInstructionsBack" class="btn-secondary">Back</button>
+          <button id="btnStartExam" class="btn-primary" style="flex: 1; margin: 0;" disabled>
+            <span>Start Assessment & Lock Workstation</span>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+          </button>
+        </div>
+      </div>
+    </section>
+
+    <!-- =========================================================
+         SCREEN 4: ACTIVE ASSESSMENT (CBT RUNNER)
+         ========================================================= -->
+    <section id="screenExam" class="screen-view">
+      <!-- Runner Topbar -->
+      <div class="exam-topbar">
+        <div class="exam-title-block">
+          <div class="exam-brand-lockup">
+            <img src="assets/brand/mascot.webp" alt="TestMeMan Mascot" class="exam-brand-mascot">
+            <img src="assets/brand/wordmark-white.webp" alt="TestMeMan" class="exam-brand-wordmark">
+          </div>
+          <div class="exam-brand-divider"></div>
+          <div class="exam-live-indicator">
+            <span class="status-dot dot-green animate-beacon"></span>
+            Proctored Session
+          </div>
+          <div id="examLiveTitle" class="exam-test-name">TCS NQT 2026</div>
+          <div id="examCandidateLabel" class="exam-candidate-tag">Rahul Sharma</div>
+        </div>
+
+        <div class="exam-clock-wrapper">
+          <div id="syncStatusBadge" class="badge-pill">
+            <span class="status-dot dot-green"></span>
+            <span id="syncStatusText">Synced</span>
+          </div>
+          <div id="violationBadge" class="badge-pill">
+            0 Events
+          </div>
+          <div id="examClock" class="exam-clock">45:00</div>
+          <button id="btnSubmitExam" class="btn-finish-exam">Submit Test</button>
+        </div>
+      </div>
+
+      <!-- Main Runner Body -->
+      <div class="exam-body-layout">
+        <!-- Center Question Workspace -->
+        <div class="exam-work-pane">
+          <div id="examSectionTabs" class="section-tabs">
+            <!-- Tabs injected dynamically -->
+          </div>
+
+          <div class="q-meta-row">
+            <div id="qNumberPill" class="q-id-tag">Question 1 of 5</div>
+            <div id="qMarksPill" class="q-marks-tag">+2.0 / -0.25 Marks</div>
+          </div>
+
+          <div class="q-content-box hacker-glass hacker-specular">
+            <div id="qText" class="q-text-body">
+              Loading assessment item...
+            </div>
+
+            <div id="optionsContainer" class="options-list">
+              <!-- Options injected dynamically -->
+            </div>
+          </div>
+
+          <div class="q-footer-bar">
+            <div style="display: flex; gap: 10px;">
+              <button id="btnClear" class="btn-secondary">Clear Response</button>
+              <button id="btnMark" class="btn-secondary">Mark for Review</button>
+            </div>
+            <div style="display: flex; gap: 10px;">
+              <button id="btnPrev" class="btn-secondary">← Previous</button>
+              <button id="btnNext" class="btn-primary" style="margin: 0; padding: 11px 24px; width: auto;">Save & Next →</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Right Palette Pane -->
+        <aside class="palette-sidebar">
+          <div class="sidebar-title">Question Palette</div>
+          <div id="paletteGrid" class="palette-grid">
+            <!-- Numbers injected dynamically -->
+          </div>
+
+          <div class="legend-box">
+            <div class="legend-row">
+              <div class="legend-dot" style="background: var(--emerald);"></div>
+              <span>Answered</span>
+            </div>
+            <div class="legend-row">
+              <div class="legend-dot" style="background: var(--violet);"></div>
+              <span>Marked for Review</span>
+            </div>
+            <div class="legend-row">
+              <div class="legend-dot" style="background: var(--emerald); border: 2px solid var(--violet);"></div>
+              <span>Answered & Marked</span>
+            </div>
+            <div class="legend-row">
+              <div class="legend-dot" style="background: rgba(19, 28, 49, 0.6); border: 1px solid var(--line);"></div>
+              <span>Unattempted</span>
+            </div>
+          </div>
+        </aside>
+
+        <!-- Proctor Camera PiP -->
+        <div class="pip-camera-tile">
+          <video id="proctorVideo" class="pip-video" autoplay playsinline muted></video>
+          <div class="pip-audio-indicator">
+            <div id="audioLevelBar" class="pip-audio-fill"></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- =========================================================
+         SCREEN 5 / MODAL: SUBMISSION CONFIRMATION
+         ========================================================= -->
+    <div id="modalSubmitConfirm" class="modal-overlay">
+      <div class="modal-card hacker-glass hacker-specular">
+        <h2 style="font-size: 20px; font-weight: 700; color: var(--ink);">Confirm Submission</h2>
+        <p style="font-size: 13px; color: var(--ink-3); margin-top: 4px;">
+          Review your final response summary before finalizing your test attempt.
+        </p>
+
+        <div class="modal-stats">
+          <div class="modal-stat-card">
+            <div id="modalStatTotal" class="stat-number">7</div>
+            <div class="stat-caption">Total Items</div>
+          </div>
+          <div class="modal-stat-card">
+            <div id="modalStatAnswered" class="stat-number" style="color: var(--emerald);">5</div>
+            <div class="stat-caption">Answered</div>
+          </div>
+          <div class="modal-stat-card">
+            <div id="modalStatUnanswered" class="stat-number" style="color: var(--amber);">2</div>
+            <div class="stat-caption">Unattempted</div>
+          </div>
+        </div>
+
+        <div id="modalUnansweredNotice" style="font-size: 12.5px; color: var(--amber); padding: 10px 14px; background: var(--amber-muted); border: 1px solid rgba(245, 158, 11, 0.3); border-radius: 8px; margin-bottom: 16px; display: none;">
+          Notice: You have unattempted questions remaining.
+        </div>
+
+        <!-- Submission progress bar -->
+        <div id="submitProgressBarContainer" class="submit-progress-container" style="display: none;">
+          <div id="submitProgressBarFill" class="submit-progress-fill"></div>
+        </div>
+
+        <div style="display: flex; gap: 12px; justify-content: flex-end; margin-top: 24px;">
+          <button id="btnCancelSubmit" class="btn-secondary">Return to Test</button>
+          <button id="btnConfirmSubmit" class="btn-primary" style="margin: 0; padding: 11px 24px; width: auto;">
+            Finalize & Submit
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- =========================================================
+         SCREEN 6: OFFICIAL RESULT & INTEGRITY RECEIPT
+         ========================================================= -->
+    <section id="screenReceipt" class="screen-view">
+      <div class="receipt-wrapper">
+        <div class="stage-header" style="text-align: center;">
+          <div class="auth-subtitle">Official Submission Record</div>
+          <h1 class="stage-title">Assessment Submitted</h1>
+          <p class="stage-desc">Your responses have been recorded and your integrity receipt has been verified.</p>
+        </div>
+
+        <div class="receipt-card hacker-glass hacker-specular">
+          <div class="receipt-item">
+            <span class="receipt-k">Receipt ID</span>
+            <span id="rcptReceiptId" class="receipt-v mono">OA-RCPT-2026</span>
+          </div>
+          <div class="receipt-item">
+            <span class="receipt-k">Candidate Name</span>
+            <span id="rcptCandidate" class="receipt-v">Rahul Sharma</span>
+          </div>
+          <div class="receipt-item">
+            <span class="receipt-k">Roll / Candidate ID</span>
+            <span id="rcptRoll" class="receipt-v">22CS089</span>
+          </div>
+          <div class="receipt-item">
+            <span class="receipt-k">Assessment Title</span>
+            <span id="rcptExam" class="receipt-v">TCS NQT 2026</span>
+          </div>
+          <div class="receipt-item">
+            <span class="receipt-k">Verified Score</span>
+            <span id="rcptScore" class="receipt-v" style="color: var(--emerald);">12 / 16 (75%)</span>
+          </div>
+          <div class="receipt-item">
+            <span class="receipt-k">Questions Attempted</span>
+            <span id="rcptQuestions" class="receipt-v">7 of 7 items</span>
+          </div>
+          <div class="receipt-item">
+            <span class="receipt-k">Integrity Events</span>
+            <span id="rcptViolations" class="receipt-v">0 Events Recorded</span>
+          </div>
+          <div class="receipt-item">
+            <span class="receipt-k">Verification Authority</span>
+            <span id="rcptAuthority" class="receipt-v">TestMeMan Cloud Assessment Engine</span>
+          </div>
+          <div class="receipt-item">
+            <span class="receipt-k">Timestamp</span>
+            <span id="rcptTime" class="receipt-v">Just now</span>
+          </div>
+        </div>
+
+        <button id="btnExitApp" class="btn-secondary" style="width: 100%; justify-content: center; padding: 13px;">
+          Exit Application & Return to Desktop
+        </button>
+      </div>
+    </section>
+
+    <!-- =========================================================
+         SCREEN 7: SESSION RECOVERY
+         ========================================================= -->
+    <section id="screenRecovery" class="screen-view">
+      <div class="stage-container" style="max-width: 540px; text-align: center;">
+        <div class="stage-header" style="text-align: center;">
+          <div class="auth-subtitle">Fault-Tolerant Session</div>
+          <h1 class="stage-title">Active Session Detected</h1>
+          <p class="stage-desc">An in-progress assessment attempt was recovered from local cache.</p>
+        </div>
+
+        <div class="receipt-card hacker-glass hacker-specular" style="text-align: left;">
+          <div class="receipt-item">
+            <span class="receipt-k">Attempt ID</span>
+            <span id="recAttemptId" class="receipt-v mono">-</span>
+          </div>
+          <div class="receipt-item">
+            <span class="receipt-k">Time Remaining</span>
+            <span id="recTimeRemaining" class="receipt-v">-</span>
+          </div>
+          <div class="receipt-item">
+            <span class="receipt-k">Cached Answers</span>
+            <span id="recAnswersCount" class="receipt-v">-</span>
+          </div>
+
+          <div style="display: flex; gap: 12px; margin-top: 24px;">
+            <button id="btnDiscardRecovery" class="btn-secondary" style="flex: 1;">Discard</button>
+            <button id="btnResumeSession" class="btn-primary" style="flex: 2; margin: 0;">
+              Resume Assessment
+            </button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <script src="js/camera.js"></script>
+  <script src="js/cbtEngine.js"></script>
+  <script src="js/app.js"></script>
+</body>
+</html>

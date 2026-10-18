@@ -1,0 +1,305 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self' app:; script-src 'self' app: 'unsafe-eval'; style-src 'self' app: 'unsafe-inline'; img-src 'self' app: data: blob:; media-src 'self' app: blob: mediastream:; connect-src 'self' app: data: blob:; worker-src 'self' app: blob:; font-src 'self' app:" />
+  <title>TestMeMan Secure Exam</title>
+  <link rel="stylesheet" href="styles/app.css" />
+</head>
+<body>
+  <div class="drag-bar"></div>
+
+  <!-- ═════════ 1. CODE ═════════ -->
+  <section class="screen screen-center" id="screen-code" data-active>
+    <div class="code-hero">
+      <img class="brand-logo" src="assets/brand/logo-full.png" alt="TestMeMan" />
+      <span class="pill pill-brand"><span class="dot"></span>Secure Exam</span>
+      <h1 class="display">Enter your <em>access code</em></h1>
+      <p class="lede">The 6-character code from your registration email. It's unique to you.</p>
+      <form id="code-form" class="code-form" autocomplete="off">
+        <div class="code-boxes" id="code-boxes">
+          <input maxlength="1" aria-label="Character 1" /><input maxlength="1" aria-label="Character 2" /><input maxlength="1" aria-label="Character 3" />
+          <span class="code-sep">–</span>
+          <input maxlength="1" aria-label="Character 4" /><input maxlength="1" aria-label="Character 5" /><input maxlength="1" aria-label="Character 6" />
+        </div>
+        <p class="form-error" id="code-error" role="alert"></p>
+        <button class="btn btn-primary btn-lg" id="code-submit" type="submit" disabled>Continue <span class="arrow">→</span></button>
+      </form>
+      <div class="code-help">
+        <button class="link" id="help-link" type="button">Where do I find my code?</button>
+      </div>
+    </div>
+    <footer class="app-footer">
+      <span id="net-status" class="net"><span class="dot"></span><span>Checking connection…</span></span>
+      <span id="app-version"></span>
+    </footer>
+  </section>
+
+  <!-- ═════════ 2. PROFILE ═════════ -->
+  <section class="screen screen-center" id="screen-profile">
+    <div class="profile-wrap">
+      <p class="eyebrow">Step 1 of 4 · Confirm it's you</p>
+      <div class="card profile-card">
+        <div class="profile-photo" id="profile-photo"><span>No photo</span></div>
+        <div class="profile-info">
+          <h2 id="profile-name">—</h2>
+          <dl class="kv">
+            <div><dt>Email</dt><dd id="profile-email">—</dd></div>
+            <div><dt>College</dt><dd id="profile-college">—</dd></div>
+            <div id="profile-roll-row"><dt>Roll no.</dt><dd id="profile-roll">—</dd></div>
+          </dl>
+        </div>
+      </div>
+      <div class="card exam-card">
+        <div class="exam-card-head">
+          <div>
+            <p class="muted small" id="exam-organizer">—</p>
+            <h3 id="exam-title">—</h3>
+          </div>
+          <span class="pill" id="exam-status-pill">Open</span>
+        </div>
+        <div class="exam-stats">
+          <div><strong id="exam-duration">—</strong><span>minutes</span></div>
+          <div><strong id="exam-questions">—</strong><span>questions</span></div>
+          <div><strong id="exam-sections">—</strong><span>sections</span></div>
+          <div><strong id="exam-negative">—</strong><span>negative</span></div>
+        </div>
+        <p class="exam-window" id="exam-window"></p>
+        <div class="proctor-tags" id="proctor-tags"></div>
+      </div>
+      <div class="blocked card" id="profile-blocked" hidden>
+        <strong id="blocked-title">Not open yet</strong>
+        <p id="blocked-text"></p>
+        <div class="countdown" id="countdown" hidden></div>
+      </div>
+      <div class="actions">
+        <button class="btn btn-ghost" id="profile-back" type="button">Not me</button>
+        <button class="btn btn-primary btn-lg" id="profile-continue" type="button">Yes, this is me <span class="arrow">→</span></button>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═════════ 3. SYSTEM CHECK ═════════ -->
+  <section class="screen screen-center" id="screen-check">
+    <div class="check-wrap">
+      <p class="eyebrow">Step 2 of 4 · System check</p>
+      <h2 class="title">Let's make sure your device is ready</h2>
+      <div class="check-grid">
+        <div class="card check-camera">
+          <video id="check-video" autoplay muted playsinline></video>
+          <div class="mic-meter"><span>Mic</span><div class="meter"><i id="mic-bar"></i></div></div>
+        </div>
+        <ul class="card check-list" id="check-list">
+          <li data-check="network"><span class="state"></span><div><strong>Internet</strong><p>Checking…</p></div></li>
+          <li data-check="camera"><span class="state"></span><div><strong>Camera</strong><p>Checking…</p></div></li>
+          <li data-check="mic"><span class="state"></span><div><strong>Microphone</strong><p>Checking…</p></div></li>
+          <li data-check="display"><span class="state"></span><div><strong>Single display</strong><p>Checking…</p></div></li>
+          <li data-check="vm"><span class="state"></span><div><strong>No virtual machine or remote desktop</strong><p>Checking…</p></div></li>
+          <li data-check="apps"><span class="state"></span><div><strong>Other apps closed</strong><p>Checking…</p></div><button class="btn btn-sm" id="close-apps" hidden>Close them</button></li>
+          <li data-check="ai"><span class="state"></span><div><strong>AI proctoring engine</strong><p>Loading…</p></div></li>
+        </ul>
+      </div>
+      <div class="actions">
+        <button class="btn btn-ghost" id="check-retry" type="button">Re-check</button>
+        <button class="btn btn-primary btn-lg" id="check-continue" type="button" disabled>Continue <span class="arrow">→</span></button>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═════════ 4. IDENTITY ═════════ -->
+  <section class="screen screen-center" id="screen-identity">
+    <div class="identity-wrap">
+      <p class="eyebrow">Step 3 of 4 · Identity check</p>
+      <div class="identity-grid">
+        <div class="identity-stage">
+          <video id="id-video" autoplay muted playsinline></video>
+          <svg class="face-guide" viewBox="0 0 100 100" preserveAspectRatio="none"><ellipse id="face-oval" cx="50" cy="47" rx="21" ry="30" /></svg>
+          <div class="id-prompt" id="id-prompt">Position your face inside the oval</div>
+          <div class="id-progress"><i id="id-progress-bar"></i></div>
+        </div>
+        <div class="identity-side">
+          <div class="ref-photo card">
+            <p class="muted small">Registration photo</p>
+            <div class="ref-img" id="ref-img"></div>
+          </div>
+          <ol class="id-steps" id="id-steps">
+            <li data-step="center">Face the camera</li>
+            <li data-step="turn1">Turn your head to one side</li>
+            <li data-step="turn2">Now the other side</li>
+            <li data-step="capture">Look straight at the camera</li>
+            <li data-step="match">Matching your face</li>
+          </ol>
+          <div class="id-result" id="id-result" hidden>
+            <div class="ring" id="id-ring"><span id="id-ring-val">0%</span></div>
+            <div><strong id="id-result-title"></strong><p id="id-result-text"></p></div>
+          </div>
+          <div class="actions">
+            <button class="btn btn-ghost" id="id-retry" type="button" hidden>Try again</button>
+            <button class="btn btn-primary btn-lg" id="id-continue" type="button" hidden>Continue <span class="arrow">→</span></button>
+          </div>
+          <p class="muted tiny">Your face is analysed on this device. Only snapshots go to your organizer for review.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═════════ 5. RULES ═════════ -->
+  <section class="screen screen-center" id="screen-rules">
+    <div class="rules-wrap">
+      <p class="eyebrow">Step 4 of 4 · Exam rules</p>
+      <h2 class="title">Before you begin</h2>
+      <div class="card rules-card">
+        <ul class="rules" id="rules-list"></ul>
+        <div class="organizer-notes" id="organizer-notes" hidden><strong>From your organizer</strong><p id="organizer-notes-text"></p></div>
+      </div>
+      <label class="agree"><input type="checkbox" id="agree" /> <span>I have read the rules. I will take this exam alone, without help, phones or notes.</span></label>
+      <div class="actions">
+        <button class="btn btn-primary btn-lg" id="start-exam" type="button" disabled>Start exam <span class="arrow">→</span></button>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═════════ 6. EXAM ═════════ -->
+  <section class="screen exam" id="screen-exam">
+    <header class="exam-top">
+      <div class="exam-top-left">
+        <img src="assets/brand/mascot.png" alt="" class="mascot" />
+        <div>
+          <strong id="x-title">—</strong>
+          <span class="muted small" id="x-candidate">—</span>
+        </div>
+      </div>
+      <div class="exam-top-right">
+        <span class="sync" id="x-sync"><span class="dot"></span><span>Saved</span></span>
+        <span class="warn-count" id="x-warnings" title="Proctoring warnings">⚠ 0 / 6</span>
+        <div class="timer" id="x-timer">--:--</div>
+      </div>
+    </header>
+    <div class="exam-body">
+      <main class="q-pane">
+        <nav class="section-tabs" id="x-sections"></nav>
+        <div class="q-head">
+          <span class="q-num" id="x-qnum">Question 1</span>
+          <span class="muted small" id="x-marks"></span>
+        </div>
+        <div class="q-text" id="x-qtext"></div>
+        <div class="options" id="x-options"></div>
+        <div class="q-actions">
+          <button class="btn btn-ghost" id="x-review" type="button">☆ Mark for review</button>
+          <button class="btn btn-ghost" id="x-clear" type="button">Clear</button>
+          <span class="grow"></span>
+          <button class="btn" id="x-prev" type="button">← Previous</button>
+          <button class="btn btn-primary" id="x-next" type="button">Save &amp; next →</button>
+        </div>
+      </main>
+      <aside class="side-pane">
+        <div class="cam-tile">
+          <video id="x-video" autoplay muted playsinline></video>
+          <span class="rec"><span class="dot"></span>Proctored</span>
+          <div class="chips">
+            <span class="chip" id="chip-face">Face</span>
+            <span class="chip" id="chip-id">Identity</span>
+            <span class="chip" id="chip-alone">Alone</span>
+            <span class="chip" id="chip-gaze">Focus</span>
+          </div>
+          <div class="mic-mini"><i id="x-mic"></i></div>
+        </div>
+        <div class="palette-card">
+          <div class="palette-head"><strong>Questions</strong><span class="muted small" id="x-progress">0 / 0</span></div>
+          <div class="palette" id="x-palette"></div>
+          <div class="legend">
+            <span><i class="lg answered"></i>Answered</span>
+            <span><i class="lg review"></i>Marked</span>
+            <span><i class="lg visited"></i>Not answered</span>
+            <span><i class="lg"></i>Not visited</span>
+          </div>
+        </div>
+        <button class="btn btn-dark btn-block" id="x-submit" type="button">Submit exam</button>
+      </aside>
+    </div>
+    <div class="toast-stack" id="toasts"></div>
+  </section>
+
+  <!-- ═════════ 7. RECEIPT ═════════ -->
+  <section class="screen screen-center" id="screen-done">
+    <div class="done-wrap">
+      <div class="done-check">✓</div>
+      <h1 class="display">Exam <em>submitted</em></h1>
+      <p class="lede" id="done-lede">Your answers were saved and graded. Your organizer will share results.</p>
+      <div class="card receipt">
+        <dl class="kv kv-receipt">
+          <div><dt>Receipt</dt><dd id="r-id">—</dd></div>
+          <div><dt>Exam</dt><dd id="r-exam">—</dd></div>
+          <div><dt>Candidate</dt><dd id="r-name">—</dd></div>
+          <div><dt>Submitted</dt><dd id="r-time">—</dd></div>
+          <div><dt>Answered</dt><dd id="r-answered">—</dd></div>
+          <div id="r-score-row" hidden><dt>Score</dt><dd id="r-score">—</dd></div>
+        </dl>
+      </div>
+      <p class="muted small">Proctoring snapshots and the session log were sent to your organizer.</p>
+      <button class="btn btn-primary btn-lg" id="done-quit" type="button">Close app</button>
+    </div>
+  </section>
+
+  <!-- ═════════ Modals ═════════ -->
+  <div class="modal" id="modal-submit" hidden>
+    <div class="modal-card">
+      <h3>Submit your exam?</h3>
+      <p class="muted">You can't change answers after submitting.</p>
+      <table class="summary" id="submit-summary"></table>
+      <div class="actions">
+        <button class="btn btn-ghost" data-close type="button">Keep working</button>
+        <button class="btn btn-dark" id="confirm-submit" type="button">Submit now</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="modal" id="modal-warning" hidden>
+    <div class="modal-card warning-card">
+      <div class="warn-icon">!</div>
+      <h3 id="warn-title">Warning</h3>
+      <p id="warn-text"></p>
+      <p class="muted small" id="warn-count"></p>
+      <div class="actions"><button class="btn btn-primary" data-close type="button">I understand</button></div>
+    </div>
+  </div>
+
+  <div class="modal" id="modal-help" hidden>
+    <div class="modal-card">
+      <h3>Finding your access code</h3>
+      <ul class="plain">
+        <li>It's in the email from TestMeMan with the subject "Your access code for …".</li>
+        <li>If you registered through your organizer's link, it was shown on screen and emailed to you.</li>
+        <li>Codes have 6 letters and numbers. There is no 0, O, 1 or I, so you can't mix them up.</li>
+        <li>Lost it? Register again with the same email on the organizer's link and we'll resend it.</li>
+      </ul>
+      <div class="actions"><button class="btn btn-primary" data-close type="button">Got it</button></div>
+    </div>
+  </div>
+
+  <div class="modal" id="modal-offline" hidden>
+    <div class="modal-card">
+      <h3>Connection lost</h3>
+      <p class="muted">Keep answering. Your answers are stored on this device and sync when you're back online. The timer keeps running.</p>
+      <div class="actions"><button class="btn btn-primary" data-close type="button">Continue</button></div>
+    </div>
+  </div>
+
+  <div class="modal" id="submit-offline" hidden>
+    <div class="modal-card">
+      <h3>Couldn't submit: no internet</h3>
+      <p class="muted">Your answers are saved on this device and the screen is unlocked. Connect to the internet and press Try again, or reopen the app later with your code <strong id="submit-offline-code"></strong> to submit. If time runs out first, the answers that already reached the server are submitted. Tell your organizer if this keeps happening.</p>
+      <div class="actions">
+        <button class="btn btn-ghost" id="submit-offline-quit" type="button">Close app</button>
+        <button class="btn btn-primary" id="submit-offline-retry" type="button">Try again</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="loading" id="loading" hidden><div class="spinner"></div><p id="loading-text">Loading…</p></div>
+
+  <script src="vendor/human/human.js"></script>
+  <script src="js/proctor.js"></script>
+  <script src="js/app.js"></script>
+</body>
+</html>

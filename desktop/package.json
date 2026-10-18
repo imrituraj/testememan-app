@@ -1,0 +1,120 @@
+{
+  "name": "testmeman-secure-exam",
+  "version": "2.0.0",
+  "description": "TestMeMan Secure Exam: AI-proctored lockdown exam app for Windows and macOS",
+  "main": "src/main/main.js",
+  "author": "TestMeMan",
+  "license": "UNLICENSED",
+  "private": true,
+  "scripts": {
+    "start": "electron .",
+    "dev": "electron . --dev",
+    "test": "node --test test/",
+    "build:mac": "electron-builder --mac",
+    "build:win": "electron-builder --win",
+    "build": "electron-builder --mac --win"
+  },
+  "devDependencies": {
+    "electron": "^34.5.8",
+    "electron-builder": "^25.1.8"
+  },
+  "dependencies": {
+    "@vladmandic/human": "^3.3.6"
+  },
+  "build": {
+    "appId": "in.testmeman.secureexam",
+    "productName": "TestMeMan Secure Exam",
+    "copyright": "Copyright \u00a9 2026 TestMeMan",
+    "directories": {
+      "output": "dist",
+      "buildResources": "build"
+    },
+    "files": [
+      "src/**/*",
+      "package.json",
+      "node_modules/@vladmandic/human/package.json",
+      "node_modules/@vladmandic/human/dist/human.js",
+      "!node_modules/@vladmandic/human/{models,src,types,demo,assets,wiki}/**",
+      "!node_modules/@vladmandic/human/dist/{human.esm*,human.node*,tfjs*,*.map,*.d.ts}"
+    ],
+    "extraResources": [
+      {
+        "from": "node_modules/@vladmandic/human/models",
+        "to": "models",
+        "filter": [
+          "blazeface.json",
+          "facemesh.json",
+          "iris.json",
+          "faceres.json",
+          "antispoof.json",
+          "liveness.json",
+          "centernet.json",
+          "blazeface.bin",
+          "facemesh.bin",
+          "iris.bin",
+          "faceres.bin",
+          "antispoof.bin",
+          "liveness.bin",
+          "centernet.bin"
+        ]
+      }
+    ],
+    "asar": true,
+    "mac": {
+      "target": [
+        {
+          "target": "dmg",
+          "arch": [
+            "universal"
+          ]
+        }
+      ],
+      "category": "public.app-category.education",
+      "icon": "build/icon.png",
+      "hardenedRuntime": false,
+      "gatekeeperAssess": false,
+      "identity": null,
+      "darkModeSupport": false,
+      "artifactName": "TestMeMan-Secure-Exam.${ext}",
+      "extendInfo": {
+        "NSCameraUsageDescription": "TestMeMan uses your camera to verify your identity and proctor the exam.",
+        "NSMicrophoneUsageDescription": "TestMeMan uses your microphone to detect talking during the exam."
+      }
+    },
+    "dmg": {
+      "title": "TestMeMan Secure Exam",
+      "contents": [
+        {
+          "x": 140,
+          "y": 200
+        },
+        {
+          "x": 400,
+          "y": 200,
+          "type": "link",
+          "path": "/Applications"
+        }
+      ]
+    },
+    "win": {
+      "target": [
+        {
+          "target": "nsis",
+          "arch": [
+            "x64"
+          ]
+        }
+      ],
+      "icon": "build/icon.png",
+      "signAndEditExecutable": false,
+      "artifactName": "TestMeMan-Secure-Exam-Setup.${ext}"
+    },
+    "nsis": {
+      "oneClick": true,
+      "perMachine": false,
+      "createDesktopShortcut": true,
+      "shortcutName": "TestMeMan Secure Exam",
+      "runAfterFinish": true
+    }
+  }
+}

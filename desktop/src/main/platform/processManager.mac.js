@@ -47,6 +47,17 @@ const FORBIDDEN_MAC_APPS = [
   // AI & Cheating Tools, Notes, Code Editors
   { name: 'ChatGPT', proc: 'ChatGPT', category: 'AI Tools', bundleId: 'com.openai.chat' },
   { name: 'Claude', proc: 'Claude', category: 'AI Tools', bundleId: 'com.anthropic.claudefordesktop' },
+  // AI interview copilots: always-on-top overlays hidden from screen sharing, usually without a Dock icon
+  // (stealth: also matched against every running process, not only apps in the Dock)
+  { name: 'Cluely', proc: 'Cluely', category: 'AI Tools', stealth: true },
+  { name: 'Interview Coder', proc: 'Interview Coder', category: 'AI Tools', stealth: true },
+  { name: 'LockedIn AI', proc: 'LockedIn AI', category: 'AI Tools', stealth: true },
+  { name: 'Final Round AI', proc: 'Final Round AI', category: 'AI Tools', stealth: true },
+  { name: 'Parakeet AI', proc: 'Parakeet AI', category: 'AI Tools', stealth: true },
+  { name: 'Perplexity', proc: 'Perplexity', category: 'AI Tools', bundleId: 'ai.perplexity.mac' },
+  { name: 'LM Studio', proc: 'LM Studio', category: 'AI Tools', stealth: true },
+  { name: 'Ollama', proc: 'Ollama', category: 'AI Tools', stealth: true },
+  { name: 'Windsurf', proc: 'Windsurf', category: 'Notes & Editors' },
   { name: 'Notes', proc: 'Notes', category: 'Notes & Editors', bundleId: 'com.apple.Notes' },
   { name: 'Stickies', proc: 'Stickies', category: 'Notes & Editors', bundleId: 'com.apple.Stickies' },
   { name: 'TextEdit', proc: 'TextEdit', category: 'Notes & Editors', bundleId: 'com.apple.TextEdit' },
@@ -154,6 +165,15 @@ class ProcessManager {
           runningList.push(item);
         }
       }
+
+      // Agent apps (no Dock icon) are missing from that list: look for the stealth tools among all processes
+      try {
+        const { stdout: ps } = await execAsync('ps -axo comm');
+        const names = new Set(ps.split('\n').map((l) => path.basename(l.trim()).toLowerCase()).filter(Boolean));
+        for (const item of FORBIDDEN_MAC_APPS) {
+          if (item.stealth && names.has(item.proc.toLowerCase()) && !runningList.some((x) => x.name === item.name)) runningList.push(item);
+        }
+      } catch (_) {}
 
       return runningList;
     } catch (err) {

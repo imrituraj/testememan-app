@@ -45,6 +45,16 @@ const FORBIDDEN_WINDOWS_APPS = [
   // AI & Cheat Tools, Text Editors & IDEs
   { exe: 'chatgpt.exe', name: 'ChatGPT Desktop', category: 'AI Tools', mac: 'ChatGPT' },
   { exe: 'claude.exe', name: 'Claude Desktop', category: 'AI Tools', mac: 'Claude' },
+  // AI interview copilots: always-on-top overlays hidden from screen sharing
+  { exe: 'cluely.exe', name: 'Cluely', category: 'AI Tools', mac: 'Cluely' },
+  { exe: 'interview coder.exe', name: 'Interview Coder', category: 'AI Tools', mac: 'Interview Coder' },
+  { exe: 'lockedin ai.exe', name: 'LockedIn AI', category: 'AI Tools', mac: 'LockedIn AI' },
+  { exe: 'final round ai.exe', name: 'Final Round AI', category: 'AI Tools', mac: 'Final Round AI' },
+  { exe: 'parakeet ai.exe', name: 'Parakeet AI', category: 'AI Tools', mac: 'Parakeet AI' },
+  { exe: 'perplexity.exe', name: 'Perplexity', category: 'AI Tools', mac: 'Perplexity' },
+  { exe: 'lm studio.exe', name: 'LM Studio', category: 'AI Tools', mac: 'LM Studio' },
+  { exe: 'ollama app.exe', name: 'Ollama', category: 'AI Tools', mac: 'Ollama' },
+  { exe: 'windsurf.exe', name: 'Windsurf', category: 'Notes & Editors', mac: 'Windsurf' },
   { exe: 'notepad.exe', name: 'Notepad', category: 'Notes & Editors' },
   { exe: 'notepad++.exe', name: 'Notepad++', category: 'Notes & Editors' },
   { exe: 'code.exe', name: 'Visual Studio Code', category: 'Notes & Editors', mac: 'Code' },

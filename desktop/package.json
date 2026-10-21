@@ -1,6 +1,6 @@
 {
   "name": "testmeman-secure-exam",
-  "version": "2.0.0",
+  "version": "2.0.1",
   "description": "TestMeMan Secure Exam: AI-proctored lockdown exam app for Windows and macOS",
   "main": "src/main/main.js",
   "author": "TestMeMan",
@@ -24,7 +24,7 @@
   "build": {
     "appId": "in.testmeman.secureexam",
     "productName": "TestMeMan Secure Exam",
-    "copyright": "Copyright \u00a9 2026 TestMeMan",
+    "copyright": "Copyright © 2026 TestMeMan",
     "directories": {
       "output": "dist",
       "buildResources": "build"
